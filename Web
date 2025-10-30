@@ -1,0 +1,47 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>準備中</title>
+  
+  <!-- ファビコン設定 -->
+  <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon">
+  
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .notice-box {
+      padding: 40px 60px;
+      border: 3px dashed #ff4500;
+      border-radius: 15px;
+      background-color: #fff8f0;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      animation: pulse 2s infinite;
+    }
+
+    .notice-box h1 {
+      color: #ff4500;
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="notice-box">
+    <h1>現在公式サイト運営準備中！</h1>
+  </div>
+</body>
