@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Googleパスワード作成ツール</title>
+
+  <!-- ファビコン -->
+  <link rel="icon" href="https://www.google.com/favicon.ico" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f5f7fa;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #1a1a1a;
+    }
+
+    .container {
+      background: #fff;
+      width: 100%;
+      max-width: 520px;
+      border-radius: 16px;
+      box-shadow:
+        0 30px 60px -10px rgba(0,0,0,.15),
+        0 2px 6px rgba(0,0,0,.05);
+      padding: 28px;
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0 0 16px;
+      color: #111;
+      text-align: center;
+    }
+
+    .desc {
+      font-size: .9rem;
+      line-height: 1.6;
+      color: #444;
+      background-color: #f9fafc;
+      border: 1px solid #e3e6f0;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
+    }
+
+    .desc strong {
+      color: #1a1a1a;
+    }
+
+    .desc ul {
+      margin-top: 6px;
+      padding-left: 20px;
+    }
+
+    .desc li {
+      margin-bottom: 4px;
+    }
+
+    /* PC・スマホ別に非表示設定 */
+    .desc-pc, .desc-mobile {
+      display: none;
+    }
+
+    /* 768px以上はPC説明を表示 */
+    @media (min-width: 768px) {
+      .desc-pc { display: block; }
+    }
+
+    /* 767px以下はスマホ説明を表示 */
+    @media (max-width: 767px) {
+      .desc-mobile { display: block; }
+    }
+
+    .field-label {
+      font-size: .8rem;
+      font-weight: 500;
+      color: #555;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .row-inline {
+      display: flex;
+      gap: 8px;
+    }
+
+    input[type="password"] {
+      flex: 1;
+      font-size: .9rem;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #c7ccd8;
+      background-color: #fff;
+      color: #1a1a1a;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    input[type="password"]:focus {
+      border-color: #4f6bff;
+      box-shadow: 0 0 0 3px rgba(79,107,255,.2);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 600;
+      padding: 10px 14px;
+      background-color: #4f6bff;
+      color: #fff;
+      transition: background-color .15s, box-shadow .15s;
+    }
+
+    button:hover {
+      background-color: #394dff;
+      box-shadow: 0 8px 20px rgba(79,107,255,.4);
+    }
+
+    button:active {
+      background-color: #2d3ddf;
+      box-shadow: 0 4px 10px rgba(0,0,0,.3);
+    }
+
+    .output-wrapper {
+      margin-top: 24px;
+    }
+
+    .output-label {
+      font-size: .8rem;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .output-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #f0f2ff;
+      border: 1px solid #cfd4ff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      min-height: 44px;
+      word-break: break-all;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .9rem;
+      line-height: 1.4;
+      color: #1a1a1a;
+    }
+
+    .password-text {
+      flex: 1;
+    }
+
+    .copy-btn {
+      background-color: #111827;
+      color: #fff;
+    }
+
+    .copy-btn:hover {
+      background-color: #000;
+      box-shadow: 0 8px 20px rgba(0,0,0,.4);
+    }
+
+    .toast {
+      font-size: .75rem;
+      font-weight: 500;
+      color: #16a34a;
+      margin-top: 8px;
+      min-height: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Googleパスワード作成ツール</h1>
+
+    <!-- 🖥️ PC版の説明 -->
+    <div class="desc desc-pc">
+      <p><strong>Googleパスワードマネージャーのパスワード自動生成機能</strong>を使ってパスワードを作成できるツールです。</p>
+      <p>通常はパスワード入力欄でのみ生成できますが、このツールを使えばいつでも簡単に作成・コピーできます。</p>
+
+      <p><strong>使い方：</strong></p>
+      <ul>
+        <li>入力欄で右クリック → 「パスワードを自動生成」をクリック</li>
+        <li>生成されたパスワードが自動で入力されます</li>
+        <li>「作成」を押すと下に表示されます</li>
+        <li>「コピー」でクリップボードに保存できます</li>
+      </ul>
+
+      <p>※ パスワードマネージャーには <strong>ドメイン名</strong> で登録されます。</p>
+    </div>
+
+    <!-- 📱 スマホ版の説明 -->
+    <div class="desc desc-mobile">
+      <p><strong>Googleパスワードマネージャーの自動生成機能</strong>で簡単にパスワードを作成できます！</p>
+
+      <p><strong>使い方：</strong></p>
+      <ul>
+        <li>入力欄をタップ → 「パスワードを自動生成」を選択</li>
+        <li>生成されたパスワードが自動入力されます</li>
+        <li>「作成」を押して表示</li>
+        <li>「コピー」を押せば完了！</li>
+      </ul>
+
+      <p>※ パスワードマネージャーには <strong>ドメイン名</strong> で登録されます。</p>
+    </div>
+
+    <label class="field-label" for="pwdInput">パスワードを入力</label>
+    <div class="row-inline">
+      <input type="password" id="pwdInput" placeholder="右クリック（またはタップ）で自動生成" />
+      <button id="createBtn">作成</button>
+    </div>
+
+    <div class="output-wrapper">
+      <div class="output-label">作成されたパスワード</div>
+      <div class="output-row">
+        <div id="pwdOutput" class="password-text">（まだありません）</div>
+        <button id="copyBtn" class="copy-btn">コピー</button>
+      </div>
+      <div id="toast" class="toast"></div>
+    </div>
+  </div>
+
+  <script>
+    const pwdInput  = document.getElementById("pwdInput");
+    const createBtn = document.getElementById("createBtn");
+    const pwdOutput = document.getElementById("pwdOutput");
+    const copyBtn   = document.getElementById("copyBtn");
+    const toast     = document.getElementById("toast");
+
+    createBtn.addEventListener("click", () => {
+      const value = pwdInput.value;
+
+      if (value.trim() === "") {
+        pwdOutput.textContent = "（空です）";
+        toast.textContent = "パスワードが入力されていません。";
+        toast.style.color = "#dc2626";
+        return;
+      }
+
+      pwdOutput.textContent = value;
+      toast.textContent = "";
+      toast.style.color = "#16a34a";
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      const textToCopy = pwdOutput.textContent;
+
+      if (!textToCopy || textToCopy === "（まだありません）" || textToCopy === "（空です）") {
+        toast.textContent = "コピーできるパスワードがありません。";
+        toast.style.color = "#dc2626";
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        toast.textContent = "コピーしました ✔";
+        toast.style.color = "#16a34a";
+      } catch (err) {
+        console.error(err);
+        toast.textContent = "コピーに失敗しました。";
+        toast.style.color = "#dc2626";
+      }
+    });
+  </script>
+</body>
+</html>
