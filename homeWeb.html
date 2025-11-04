@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>準備中</title>
+  
+  <!-- ファビコン設定 -->
+  <link rel="icon" href="https://katsuyabase.com/data/icon2.jpg" type="image/x-icon">
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0;
+      font-family: "Arial", sans-serif;
+      text-align: center;
+    }
+
+    .notice-box {
+      max-width: 90%;
+      padding: 40px 60px;
+      border: 3px dashed #ff4500;
+      border-radius: 15px;
+      background-color: #fff8f0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      animation: pulse 2s infinite;
+      word-break: keep-all;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      margin-bottom: 10px;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: #ff4500;
+      font-size: 1.8rem;
+      font-weight: bold;
+      transition: 0.3s;
+      word-break: keep-all;
+    }
+
+    .logo a:hover {
+      color: #ff7845;
+      text-shadow: 0 0 8px rgba(255, 69, 0, 0.5);
+    }
+
+    .notice-box h1 {
+      color: #ff4500;
+      font-size: 2rem;
+      margin: 0;
+      word-break: keep-all;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* 👇 スマホ向け調整 */
+    @media (max-width: 600px) {
+      .notice-box {
+        padding: 30px 20px;
+      }
+
+      .logo img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .logo a {
+        font-size: 1.5rem;
+      }
+
+      .notice-box h1 {
+        font-size: 1.5rem;
+        line-height: 1.4;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="notice-box">
+    <div class="logo">
+      <!-- アイコンのURLを自分のサーバーのものに変更 -->
+      <img src="https://katsuyabase.com/data/icon2.jpg" alt="かつやベースのアイコン">
+      <!-- リンク先URLを変更 -->
+      <a href="https://katsuyabase.com" target="_blank">かつやベース！</a>
+    </div>
+    <h1>現在公式サイト運営準備中！</h1>
+  </div>
+</body>
+</html>
