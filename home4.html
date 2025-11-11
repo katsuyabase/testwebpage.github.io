@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>YutoLab / 3D | Official Website</title>
+  <style>
+    :root {
+      --bg1: #0b0b12;
+      --bg2: #1a1a2e;
+      --accent: #ff004f;
+      --text-main: #fff;
+      --text-dim: rgba(255,255,255,0.7);
+      --maxw: 1200px;
+      --radius: 16px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Noto Sans JP", sans-serif;
+      background: radial-gradient(circle at 20% 20%, var(--bg2) 0%, var(--bg1) 70%);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(10,10,16,0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1.2rem;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: radial-gradient(circle at 30% 30%, var(--accent), #220010 70%);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 0 10px rgba(255,0,80,0.6);
+    }
+
+    /* NAVIGATION */
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    nav > ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav > ul > li {
+      position: relative;
+    }
+
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+      padding: 0.3rem 0.4rem;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      color: var(--text-main);
+    }
+
+/* サブメニュー本体 */
+.dropdown {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background: rgba(15,15,25,0.95);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 99;
+}
+
+/* ドロップダウンの中のリンク */
+.dropdown a {
+  padding: 0.7rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dropdown a:hover {
+  background: rgba(255,255,255,0.05);
+  color: var(--accent);
+}
+
+/* hoverしたら表示 */
+nav li:hover > .dropdown,
+nav li:focus-within > .dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* hover領域を広くする（隙間対策） */
+nav li {
+  padding-bottom: 0.8rem;
+}
+
+    /* HERO */
+    .hero {
+      max-width: var(--maxw);
+      margin: 3rem auto 4rem;
+      padding: 2rem 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media(max-width:800px){
+      .hero { grid-template-columns: 1fr; text-align:center; }
+    }
+
+    .channel-info {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .channel-info img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 25px rgba(255,0,80,0.5);
+    }
+
+    .channel-info h1 {
+      font-size: clamp(1.8rem, 1.2rem + 2vw, 2.5rem);
+      margin: 0.8rem 0 0.4rem;
+      color: var(--text-main);
+    }
+
+    .subscribers {
+      font-size: 1.3rem;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+    .subscribers span {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .intro {
+      color: var(--text-dim);
+      font-size: 1rem;
+      max-width: 40ch;
+      margin: 0 auto 1.5rem;
+      text-align: center;
+    }
+
+    .cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      box-shadow: 0 0 30px rgba(255,0,80,0.5);
+      transition: transform 0.15s ease;
+    }
+
+    .cta:hover {
+      transform: scale(1.05);
+    }
+
+    .hero iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      border-radius: var(--radius);
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+
+    /* SECTION */
+    section {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    /* VIDEO GRID */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap: 1.5rem;
+    }
+
+    .video-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .video-card iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+    }
+
+    .video-card h3 {
+      font-size: 1rem;
+      padding: 0.8rem 1rem;
+      color: var(--text-main);
+    }
+
+    /* PROFILE */
+    .profile {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile img {
+      width: 200px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 30px rgba(255,0,80,0.4);
+    }
+
+    .profile .text {
+      flex: 1;
+      min-width: 260px;
+      max-width: 500px;
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* CONTACT */
+    form {
+      display: grid;
+      gap: 1rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    button:hover { opacity: 0.85; }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">YT</div>
+    <span>YutoLab / 3D</span>
+  </div>
+
+  <nav>
+    <ul>
+      <li>
+        <a href="#videos">動画</a>
+        <div class="dropdown">
+          <a href="#videos">最新動画</a>
+          <a href="#">3Dデータ配布</a>
+          <a href="#">使用BGM一覧</a>
+        </div>
+      </li>
+      <li>
+        <a href="#profile">プロフィール</a>
+        <div class="dropdown">
+          <a href="#profile">自己紹介</a>
+          <a href="#">制作実績</a>
+        </div>
+      </li>
+      <li>
+        <a href="#contact">お問い合わせ</a>
+        <div class="dropdown">
+          <a href="#contact">メールフォーム</a>
+          <a href="#">SNSリンク</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="channel-info">
+      <img src="https://yt3.googleusercontent.com/ytc/AIdro_mychannelicon=s176-c-k-c0x00ffffff-no-rj" alt="YutoLab Icon">
+      <h1>YutoLab / 3D</h1>
+      <p class="subscribers">登録者数 <span id="subs-count">12,345</span> 人</p>
+    </div>
+
+    <p class="intro">
+      3Dモデリング、Fusion360、映像制作、クリエイター向けTipsを発信しています。  
+      趣味と仕事の間を行き来するチャンネルです。
+    </p>
+
+    <a href="https://www.youtube.com/" target="_blank" class="cta">🎥 チャンネルへ</a>
+  </div>
+
+  <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen></iframe>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <h2 class="section-title">🎥 最新の動画</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      <h3>Fusion360で作るSFドローン</h3>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/aqz-KE-bpKQ" allowfullscreen></iframe>
+      <h3>初心者でもできる3D配信背景</h3>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen></iframe>
+      <h3>Blenderでローポリ飯を作る</h3>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile">
+  <h2 class="section-title">👤 プロフィール</h2>
+  <div class="profile">
+    <img src="https://placekitten.com/300/300" alt="YutoLab">
+    <div class="text">
+      <p>3Dアーティスト / YouTuber。  
+      Autodesk系ツールを中心にCGやガジェットレビューを発信。  
+      現在は個人制作とコラボ企画の両方で活動中。</p>
+      <p>主な使用ツール：Fusion 360 / Blender / After Effects / DaVinci Resolve</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title">📩 お問い合わせ</h2>
+  <form>
+    <input type="text" placeholder="お名前" required>
+    <input type="email" placeholder="メールアドレス" required>
+    <textarea rows="4" placeholder="メッセージ" required></textarea>
+    <button type="submit">送信</button>
+  </form>
+</section>
+
+<footer>
+  © 2025 YutoLab — Created with ❤️ for viewers
+</footer>
+
+<script>
+  // 仮の登録者数（手入力でOK）
+  document.getElementById("subs-count").textContent = "12,345";
+</script>
+
+</body>
+</html>
