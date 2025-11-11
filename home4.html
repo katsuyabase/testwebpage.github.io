@@ -73,27 +73,26 @@
       gap: 1.5rem;
     }
 
-    nav > ul > li {
-      position: relative;
-    }
+/* ===== DROPDOWN メニュー 改良版（隙間対策つき） ===== */
+nav li {
+  position: relative;
+}
 
-    nav a {
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-      padding: 0.3rem 0.4rem;
-      display: inline-block;
-    }
-
-    nav a:hover {
-      color: var(--text-main);
-    }
+/* hover維持用：隙間を埋める透明エリア */
+nav li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 15px; /* ← hover切れ対策。隙間を埋める透明ブリッジ */
+  background: transparent;
+}
 
 /* サブメニュー本体 */
 .dropdown {
   position: absolute;
-  top: 120%;
+  top: calc(100% + 10px); /* 少し下げる */
   left: 0;
   background: rgba(15,15,25,0.95);
   border: 1px solid rgba(255,255,255,0.1);
@@ -110,7 +109,15 @@
   z-index: 99;
 }
 
-/* ドロップダウンの中のリンク */
+/* hover or focus時に表示 */
+nav li:hover > .dropdown,
+nav li:focus-within > .dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* 子要素（リンク） */
 .dropdown a {
   padding: 0.7rem 1rem;
   font-size: 0.85rem;
