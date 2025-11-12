@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>パスワード作成ツール | katsuyabase</title>
+<style>
+:root {
+  --bg1: #0b0b12;
+  --bg2: #1a1a2e;
+  --accent: #ff004f;
+  --text-main: #fff;
+  --text-dim: rgba(255,255,255,0.7);
+  --radius: 10px;
+}
+
+/* ===== 全体 ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, var(--bg2) 0%, var(--bg1) 70%);
+  font-family: "Inter","Noto Sans JP",sans-serif;
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* ===== ヘッダー ===== */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(10,10,16,0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  z-index: 10;
+}
+
+header .logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+nav a:hover { color: var(--text-main); }
+
+/* ===== メイン ===== */
+main {
+  max-width: 600px;
+  margin: 5rem auto 3rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 0 25px rgba(255,0,80,0.2);
+  text-align: center;
+}
+
+h1 {
+  color: var(--accent);
+  font-size: 1.8rem;
+}
+
+label {
+  display: block;
+  margin: 1rem 0 0.3rem;
+  color: var(--text-dim);
+}
+
+input, select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: var(--text-main);
+}
+
+button {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255,0,80,0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255,0,80,0.6);
+}
+
+/* 出力 */
+#result {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: var(--text-main);
+  word-break: break-all;
+}
+
+/* ===== フッター ===== */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(5px);
+}
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+footer a:hover { text-decoration: underline; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">katsuyabase</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="#">ツール一覧</a></li>
+      <li><a href="#">お問い合わせ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h1>パスワード作成ツール</h1>
+
+  <label for="length">文字数</label>
+  <input type="number" id="length" min="4" max="64" value="12">
+
+  <label for="charset">使用文字セット</label>
+  <select id="charset">
+    <option value="alnum">英数字</option>
+    <option value="alnum-symbols">英数字 + 記号</option>
+    <option value="numeric">数字のみ</option>
+  </select>
+
+  <button onclick="generatePassword()">作成する</button>
+
+  <div id="result"></div>
+</main>
+
+<footer>
+  ©️2025 katsuyabase　
+  <a href="terms.html">利用規約</a>
+</footer>
+
+<script>
+function generatePassword() {
+  const length = parseInt(document.getElementById('length').value);
+  const type = document.getElementById('charset').value;
+  let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  if (type === 'alnum-symbols') chars += '!@#$%^&*()-_=+[]{};:,.<>?';
+  if (type === 'numeric') chars = '0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  document.getElementById('result').textContent = result;
+}
+</script>
+
+</body>
+</html>
