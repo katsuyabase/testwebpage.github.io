@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Googleパスワード作成ツール</title>
+  <title>パスワード作成ツール</title>
 
   <!-- ファビコン -->
-  <link rel="icon" href="https://www.google.com/favicon.ico" />
+  <link rel="icon" href="https://katsuyabase.com/data/icon2.jpg" />
 
   <style>
     body {
@@ -182,11 +182,11 @@
 </head>
 <body>
   <div class="container">
-    <h1>Googleパスワード作成ツール</h1>
+    <h1>パスワード作成ツール</h1>
 
     <!-- 🖥️ PC版の説明 -->
     <div class="desc desc-pc">
-      <p><strong>Googleパスワードマネージャーのパスワード自動生成機能</strong>を使ってパスワードを作成できるツールです。</p>
+      <p><strong>パスワードマネージャーのパスワード自動生成機能</strong>を使ってパスワードを作成できるツールです。</p>
       <p>通常はパスワード入力欄でのみ生成できますが、このツールを使えばいつでも簡単に作成・コピーできます。</p>
 
       <p><strong>使い方：</strong></p>
@@ -202,7 +202,7 @@
 
     <!-- 📱 スマホ版の説明 -->
     <div class="desc desc-mobile">
-      <p><strong>Googleパスワードマネージャーの自動生成機能</strong>で簡単にパスワードを作成できます！</p>
+      <p><strong>パスワードマネージャーの自動生成機能</strong>で簡単にパスワードを作成できます！</p>
 
       <p><strong>使い方：</strong></p>
       <ul>
@@ -217,14 +217,14 @@
 
     <label class="field-label" for="pwdInput">パスワードを入力</label>
     <div class="row-inline">
-      <input type="password" id="pwdInput" placeholder="右クリック（またはタップ）で自動生成" />
-      <button id="createBtn">作成</button>
+      <input type="password" id="pwdInput" placeholder="右クリック（またはタップ）で生成" />
+      <button id="createBtn">生成</button>
     </div>
 
     <div class="output-wrapper">
       <div class="output-label">作成されたパスワード</div>
       <div class="output-row">
-        <div id="pwdOutput" class="password-text">（まだありません）</div>
+        <div id="pwdOutput" class="password-text">（未入力）</div>
         <button id="copyBtn" class="copy-btn">コピー</button>
       </div>
       <div id="toast" class="toast"></div>
@@ -256,7 +256,7 @@
     copyBtn.addEventListener("click", async () => {
       const textToCopy = pwdOutput.textContent;
 
-      if (!textToCopy || textToCopy === "（まだありません）" || textToCopy === "（空です）") {
+      if (!textToCopy || textToCopy === "（未入力）" || textToCopy === "（空です）") {
         toast.textContent = "コピーできるパスワードがありません。";
         toast.style.color = "#dc2626";
         return;
